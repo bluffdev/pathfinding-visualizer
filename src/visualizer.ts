@@ -1,5 +1,6 @@
 import Grid from './grid.js'
 import BFS from './pathfindingAlgos/bfs.js'
+import './styles/grid.css'
 
 const width = Math.trunc(window.innerWidth / 26)
 const height = Math.trunc(window.innerHeight / 27) 
