@@ -1,16 +1,3 @@
-// {
-//   "compilerOptions": {
-//     "target": "es6",
-//     "module": "es2015",
-//     "rootDir": "./src",                     
-//     "outDir": "./public", 
-//     "esModuleInterop": true,
-//     "forceConsistentCasingInFileNames": true,
-//     "strict": true,
-//     "skipLibCheck": true
-//   }
-// }
-
 {
   "compilerOptions": {
     "target": "ESNext",

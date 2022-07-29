@@ -56,4 +56,12 @@ export default class Cell {
   public getGridCell() {
     return this.gridCell
   }
+
+  public getRow() {
+    return this.row;
+  }
+
+  public getCol() {
+    return this.col;
+  }
 }
