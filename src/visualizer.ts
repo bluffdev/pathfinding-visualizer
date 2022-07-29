@@ -11,6 +11,7 @@ let bfs: BFS = new BFS(grid.getCells(), grid.getWidth(), grid.getHeight(), grid.
 
 let start = document.querySelector('#visualize-btn') as HTMLButtonElement
 start.addEventListener('click', (e: Event) => {
+  e.preventDefault();
   start.disabled = true;
   reset.disabled = true;
   bfs.solve_bfs()
@@ -19,6 +20,7 @@ start.addEventListener('click', (e: Event) => {
 
 let reset = document.querySelector('#reset-btn') as HTMLButtonElement
 reset.addEventListener('click', (e: Event) => {
+  e.preventDefault()
   grid.resetGrid();
   bfs.resetBFS(grid.getCells());
 })
