@@ -122,6 +122,7 @@ export default class Grid {
         return this.cells;
     }
     animateVisitedNodes(visitedNodes, shortestPath) {
+        this.isAnimationRunning = true;
         for (let i = 0; i <= visitedNodes.length; i++) {
             if (i === visitedNodes.length) {
                 setTimeout(() => {
@@ -154,6 +155,7 @@ export default class Grid {
         }
     }
     resetGrid() {
+        this.isAnimationRunning = false;
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
                 this.cells[i][j].setIsAWall(false);
