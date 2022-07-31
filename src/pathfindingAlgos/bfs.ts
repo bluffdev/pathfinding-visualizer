@@ -1,14 +1,11 @@
-// import Grid from '../grid.js'
 import Cell from '../cell.js'
 import { GridIndex } from '../types/GridIndex.js'
 
 export default class BFS {
-  private row: number 
-  private col: number
-  private qr: Array<number>
-  private qc: Array<number>
-  private dr: Array<number>
-  private dc: Array<number> 
+  private readonly rows: number 
+  private readonly cols: number
+  private queue: Array<Array<number>>;
+  private directions: Array<Array<number>>
   private grid: Array<Array<Cell>>
   private visitedNodes: Array<Cell>
   private shortestPath: Array<Cell>
@@ -17,34 +14,30 @@ export default class BFS {
   private endCellIndex: GridIndex
 
   constructor(grid: Array<Array<Cell>>, width: number, height: number, startCellIndex: GridIndex, endCellIndex: GridIndex) {
-    this.row = height;
-    this.col = width;
-    this.dr = [-1, 1, 0, 0];
-    this.dc = [0, 0, 1, -1];
-    this.grid = grid;
-    this.visitedNodes = [];
-    this.shortestPath = [];
-    this.prev = new Map();
+    this.rows = height
+    this.cols = width
+    this.directions = [
+      [-1, 0], // up
+      [0, 1],  // right
+      [1, 0],  // down
+      [0, -1]  // left
+    ]
+    this.grid = grid
+    this.visitedNodes = []
+    this.shortestPath = []
+    this.prev = new Map()
     this.startCellIndex = startCellIndex
     this.endCellIndex = endCellIndex
-    this.qr = [this.startCellIndex.row];
-    this.qc = [this.startCellIndex.col];
+    this.queue = [[this.startCellIndex.row, this.startCellIndex.col]]
   }
 
-  public solve_bfs(): boolean {
-    let r;
-    let c;
+  public solve(): boolean {
     let foundEndNode = false;
 
-    while (this.qr.length > 0 && this.qc.length > 0) {
-      r = this.qr.shift();
-      c = this.qc.shift();
+    while (this.queue.length > 0) {
+      const [ r, c ] = this.queue.shift()!
 
-      if (r === undefined || c === undefined) {
-        console.error('Current Row or Column is Undefined')
-        return false
-      }
-
+      // checks if the current node is the end node
       if (this.grid[r][c].getIsEndCell() === true) {
         foundEndNode = true;
         break;
@@ -61,41 +54,40 @@ export default class BFS {
   }
 
   private exploreNeighbors(r: number, c: number) {
-    let rr: number
-    let cc: number
+    let nr: number  // current neighbor row
+    let nc: number  // current neighbor col
 
-    for (let i = 0; i < 4; i++) {
-      rr = r + this.dr[i];
-      cc = c + this.dc[i];
+    for (const [ dr, dc ] of this.directions) {
+      nr = r + dr;
+      nc = c + dc;
 
-      if (rr < 0 || cc < 0) continue;
-      if (rr >= this.row || cc >= this.col) continue;
+      if (nr < 0 || nc < 0) continue
+      if (nr >= this.rows || nc >= this.cols) continue
 
-      if (this.grid[rr][cc].getHasBeenVisited() === true) continue;
-      if (this.grid[rr][cc].getIsAWall() === true) continue; 
+      if (this.grid[nr][nc].getHasBeenVisited() === true) continue
+      if (this.grid[nr][nc].getIsAWall() === true) continue 
 
-      this.qr.push(rr);
-      this.qc.push(cc);
+      this.queue.push([nr, nc])
 
-      this.grid[rr][cc].setHasBeenVisited(true)
+      this.grid[nr][nc].setHasBeenVisited(true)
 
       if (r == this.startCellIndex.row && c == this.endCellIndex.col) {
-        this.prev.set(this.grid[rr][cc], this.grid[23][25]);
+        this.prev.set(this.grid[nr][nc], this.grid[23][25])
       }
 
       else {
-        this.prev.set(this.grid[rr][cc], this.grid[r][c]);
+        this.prev.set(this.grid[nr][nc], this.grid[r][c])
       }
 
-      this.visitedNodes.push(this.grid[rr][cc]);
+      this.visitedNodes.push(this.grid[nr][nc])
     }
   }
 
   private reconstructPath(): void {
-    let ex = this.endCellIndex.row;
-    let ey = this.endCellIndex.col;
+    let er = this.endCellIndex.row  // end node row number
+    let ec = this.endCellIndex.col  // end node col number
 
-    let curr = this.prev.get(this.grid[ex][ey])
+    let curr = this.prev.get(this.grid[er][ec])
 
     if (curr === undefined) return
 
@@ -108,16 +100,15 @@ export default class BFS {
       }
     }
 
-    this.shortestPath = this.shortestPath.reverse();
+    this.shortestPath = this.shortestPath.reverse()
   }
 
   public resetBFS(grid: Array<Array<Cell>>) {
-    this.qr = [this.startCellIndex.row];
-    this.qc = [this.startCellIndex.col];
-    this.grid = grid;
-    this.visitedNodes = [];
-    this.shortestPath = [];
-    this.prev = new Map();
+    this.queue = [[this.startCellIndex.row, this.startCellIndex.col]]
+    this.grid = grid
+    this.visitedNodes = []
+    this.shortestPath = []
+    this.prev.clear();
   }
 
   public getVisitedNodes() {
