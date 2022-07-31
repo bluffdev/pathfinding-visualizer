@@ -1,15 +1,16 @@
 import Grid from './grid.js'
-import BFS from './pathfindingAlgos/bfs.js'
+import BFS from './pathfinding/bfs.js'
+// import DFS from './pathfinding/dfs.js'
 import './styles/grid.css'
 
 (function main() {
   const width = Math.trunc(window.innerWidth / 26)
   const height = Math.trunc(window.innerHeight / 28) 
-  console.log(width, height)
 
   let grid: Grid = new Grid(width, height)
   grid.drawGrid()
-  let bfs: BFS = new BFS(grid.getCells(), grid.getWidth(), grid.getHeight(), grid.getStartCellIndex(), grid.getEndCellIndex())
+  let bfs = new BFS(grid.getCells(), grid.getWidth(), grid.getHeight(), grid.getStartCellIndex(), grid.getEndCellIndex())
+  // let dfs = new DFS(grid.getCells(), grid.getWidth(), grid.getHeight(), grid.getStartCellIndex(), grid.getEndCellIndex())
 
   let start = document.querySelector('#visualize-btn') as HTMLButtonElement
   start.addEventListener('click', (e: Event) => {
