@@ -4,7 +4,8 @@ import './styles/grid.css'
 
 (function main() {
   const width = Math.trunc(window.innerWidth / 26)
-  const height = Math.trunc(window.innerHeight / 27) 
+  const height = Math.trunc(window.innerHeight / 28) 
+  console.log(width, height)
 
   let grid: Grid = new Grid(width, height)
   grid.drawGrid()
@@ -12,7 +13,7 @@ import './styles/grid.css'
 
   let start = document.querySelector('#visualize-btn') as HTMLButtonElement
   start.addEventListener('click', (e: Event) => {
-    e.preventDefault();
+    e.preventDefault()
     start.disabled = true
     reset.disabled = true
     bfs.solve()
