@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #02182B;
+  background-color: #02182b;
   height: 3em;
 }
 
@@ -18,10 +18,10 @@
 }
 
 .buttons {
-  padding: .5em 2em;
+  padding: 0.5em 1.5em;
   margin-right: 1em;
   margin-left: 1em;
-  background-color: #0788c4; 
+  background-color: #0788c4;
   color: white;
   border: none;
   border-radius: 3px;
@@ -42,7 +42,7 @@
 }
 
 .wall {
-  background-color: #02182B;
+  background-color: #02182b;
   border: none;
   animation-name: wall;
   animation-duration: 0.2s;
@@ -74,28 +74,28 @@
 
 @keyframes wall {
   0% {
-    transform: scale(.2);
-    background-color: #02182B;
+    transform: scale(0.2);
+    background-color: #02182b;
   }
 
   25% {
-    transform: scale(.4);
-    background-color: #02182B;
+    transform: scale(0.4);
+    background-color: #02182b;
   }
 
   50% {
-    transform: scale(.6);
-    background-color: #02182B;
+    transform: scale(0.6);
+    background-color: #02182b;
   }
 
   75% {
     transform: scale(0.8);
-    background-color: #02182B;
+    background-color: #02182b;
   }
 
   100% {
-    transform: scale(1.0);
-    background-color: #02182B;
+    transform: scale(1);
+    background-color: #02182b;
   }
 }
 
@@ -107,12 +107,12 @@
   }
 
   50% {
-    background-color: #1C77C3;
+    background-color: #1c77c3;
   }
 
   75% {
     transform: scale(1.2);
-    background-color: #40BCD8;
+    background-color: #40bcd8;
   }
 
   100% {

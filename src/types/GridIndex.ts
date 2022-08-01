@@ -1,4 +1,4 @@
 export type GridIndex = {
-  row: number,
-  col: number
-}
+  row: number;
+  col: number;
+};
