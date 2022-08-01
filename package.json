@@ -12,5 +12,8 @@
   "devDependencies": {
     "typescript": "^4.7.4",
     "vite": "^3.0.4"
+  },
+  "dependencies": {
+    "prettier": "^2.7.1"
   }
 }
