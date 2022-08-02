@@ -31,14 +31,20 @@ import './styles/grid.css';
 
   let cur = '';
 
+  let algoDropDown = document.querySelector(
+    '.dropdown-toggle'
+  ) as HTMLButtonElement;
+
   algos.forEach((algo, index) => {
     algo.addEventListener('click', (e: Event) => {
       e.preventDefault();
       console.log(index);
       if (index === 0) {
         cur = 'bfs';
+        algoDropDown.innerHTML = 'Breadth-First Search';
       } else if (index === 1) {
         cur = 'dfs';
+        algoDropDown.innerHTML = 'Depth-First Search';
       }
     });
   });
@@ -56,6 +62,8 @@ import './styles/grid.css';
     } else if (cur === 'dfs') {
       dfs.solve();
       grid.animateVisitedNodes(dfs.getVisitedNodes(), dfs.getShortestPath());
+    } else {
+      alert('Please select an algorithm');
     }
   });
 
@@ -70,5 +78,6 @@ import './styles/grid.css';
     }
     start.disabled = false;
     cur = '';
+    algoDropDown.innerHTML = 'Select an Algorithm';
   });
 })();
